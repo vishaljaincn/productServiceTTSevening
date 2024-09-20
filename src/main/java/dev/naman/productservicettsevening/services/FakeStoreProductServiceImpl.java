@@ -35,12 +35,12 @@ public class FakeStoreProductServiceImpl implements ProductService {
     }
 
     private <T> ResponseEntity<T> requestForEntity(HttpMethod httpMethod, String url, @Nullable Object request,
-                                               Class<T> responseType, Object... uriVariables) throws RestClientException {
+                                                   Class<T> responseType, Object... uriVariables) throws RestClientException {
         RestTemplate restTemplate = restTemplateBuilder.requestFactory(
                 HttpComponentsClientHttpRequestFactory.class
         ).build();
 
-        RequestCallback requestCallback =restTemplate.httpEntityCallback(request, responseType);
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(request, responseType);
         ResponseExtractor<ResponseEntity<T>> responseExtractor = restTemplate.responseEntityExtractor(responseType);
         return restTemplate.execute(url, httpMethod, requestCallback, responseExtractor, uriVariables);
     }
@@ -63,7 +63,7 @@ public class FakeStoreProductServiceImpl implements ProductService {
 
         List<Product> answer = new ArrayList<>();
 
-        for (FakeStoreProductDto productDto: fakeStoreProductDtos) {
+        for (FakeStoreProductDto productDto : fakeStoreProductDtos) {
             answer.add(convertFakeStoreProductDtoToProduct(productDto));
         }
 
@@ -83,7 +83,7 @@ public class FakeStoreProductServiceImpl implements ProductService {
             return Optional.of(convertFakeStoreProductDtoToProduct(fakeStoreProductDto));
         }
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> response =  restTemplate.getForEntity(
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(
                 "https://fakestoreapi.com/products/{id}",
                 FakeStoreProductDto.class, productId);
 
@@ -107,7 +107,7 @@ public class FakeStoreProductServiceImpl implements ProductService {
 //        }
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(
-            "https://fakestoreapi.com/products",
+                "https://fakestoreapi.com/products",
                 product,
                 FakeStoreProductDto.class
         );

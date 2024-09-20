@@ -4,8 +4,8 @@ import dev.naman.productservicettsevening.dtos.ProductDto;
 import dev.naman.productservicettsevening.exceptions.NotFoundException;
 import dev.naman.productservicettsevening.models.Product;
 import dev.naman.productservicettsevening.repositories.ProductRepository;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +25,7 @@ public class SelfProductService implements ProductService {
     }
 
     @Override
+    @Transactional
     public Optional<Product> getSingleProduct(Long productId) throws NotFoundException {
         Product product = productRepository.findProductById(productId);
 

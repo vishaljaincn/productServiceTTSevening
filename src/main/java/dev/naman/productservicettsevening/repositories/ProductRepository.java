@@ -2,7 +2,6 @@ package dev.naman.productservicettsevening.repositories;
 
 import dev.naman.productservicettsevening.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findByPriceBetweenAndTitleLessThanEqual(double greaterThanEqualPrice, double lessThanEqualPrice, String titleLessThan);
     // select * from products wherr
-
+    ProductNameProjection findNameById(Long id);
 
     Product findByPriceLessThanEqual(double price);
     // select * from products where prices <= 100
