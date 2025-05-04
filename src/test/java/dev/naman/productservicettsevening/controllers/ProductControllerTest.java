@@ -103,6 +103,8 @@ package dev.naman.productservicettsevening.controllers;
 
 import dev.naman.productservicettsevening.models.Product;
 import dev.naman.productservicettsevening.services.SelfProductService;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,7 +130,7 @@ class ProductControllerTest {
     @Test
     void testAbsShouldReturnCorrectValue() {
         int i = Math.abs(-2);
-        assertEquals(2, i);
+        Assertions.assertEquals(2, i);
     }
 
     @Test
@@ -180,6 +182,10 @@ class ProductControllerTest {
     void testStringAssertions() {
         assertThat("hello").isEqualTo("hello");
         assertThat("hello").isNotEqualTo("hi");
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat("hello").isEqualTo("hello");
+        softAssertions.assertThat("hello").isNotEqualTo("hi");
+        softAssertions.assertAll();
     }
 
     @Test
